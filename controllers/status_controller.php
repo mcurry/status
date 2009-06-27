@@ -6,12 +6,6 @@ class StatusController extends StatusAppController {
 	var $components = array('RequestHandler');
 
 	function index() {
-		Configure::write('Status.panels', array('google_analytics' => array('visits', 'referrers', 'keywords'),
-																						'system',
-																						'shell',
-																						'logs' => array('error', 'debug'),
-																					 ));
-
 		$panels = array();
 		foreach(Configure::read('Status.panels') as $panel => $options) {
 

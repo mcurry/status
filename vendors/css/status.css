@@ -1,0 +1,66 @@
+/* =General
+-----------------------------------------------------------------------------*/
+body {
+	font-family:'lucida grande',verdana,helvetica,arial,sans-serif;
+	font-size:.7em;
+}
+
+.status-detail {
+	cursor: pointer;
+}
+
+/* =Blocks
+-----------------------------------------------------------------------------*/
+.block {
+	border: 1px solid #ccc;
+	float: left;
+	width: 300px;
+	margin: 0 10px 10px 10px;
+	padding: 5px;
+	background: #003D4C;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+	.block h1 {
+		background: #003D4C;
+		color: #eee;
+		font-weight: bold;
+		padding: 0 5px 2px 5px;
+		margin: 0;
+	}
+	.block h2 {
+		font-size: 1em;
+		padding: 2px 5px;
+	}
+	.block p,
+	.block div {
+		background: #fff;
+	}
+	.block p {
+		padding: 2px 5px;
+	}
+
+/* =Tables
+-----------------------------------------------------------------------------*/
+table {
+	border-collapse: collapse;
+	margin: 0;
+}
+table tr th,
+table tr td {
+	text-align: left;
+	border: 1px solid #ccc;
+}
+
+/* =Messages
+-----------------------------------------------------------------------------*/
+.success,
+.success td {
+	background: green;
+	color: #fff;
+}
+.error,
+.error td {
+	background: red;
+	color: #fff;
+}

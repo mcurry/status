@@ -1,0 +1,11 @@
+<?php
+class STATUS_CONFIG {
+
+  var $googleAnalytics = array(
+    'datasource' => 'google_analytics',
+    'username' => 'xxxx',
+    'password' => 'yyyy',
+  );
+
+}
+?>

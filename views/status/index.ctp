@@ -1,3 +1,4 @@
+<div id="status-panels">
 <?php
 	foreach($panels as $panel) {
 		//echo '<div id=' . $plugin['name'] . 'Block></div>';
@@ -9,3 +10,4 @@
 			. '</div>';
 	}
 ?>
+</div>

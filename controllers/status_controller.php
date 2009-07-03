@@ -30,9 +30,8 @@ class StatusController extends StatusAppController {
 													'element' => $panel,
 													'options' => $option);
 			}
-
-
 		}
+
 		$this->set('panels', $panels);
 	}
 

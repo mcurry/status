@@ -5,6 +5,7 @@ class STATUS_CONFIG {
     'datasource' => 'google_analytics',
     'username' => 'xxxx',
     'password' => 'yyyy',
+		'account_id' => 'zzzzzzz'
   );
 
 }

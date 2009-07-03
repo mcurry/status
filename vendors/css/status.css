@@ -28,6 +28,9 @@ body {
 		padding: 0 5px 2px 5px;
 		margin: 0;
 	}
+	.block h1 select {
+		vertical-align: middle;
+	}
 	.block h2 {
 		font-size: 1em;
 		padding: 2px 5px;

@@ -69,11 +69,11 @@ class StatusController extends StatusAppController {
 		return $this->_parseFile($filename);
 	}
 
-	function google_analytics($type) {
+	function google_analytics($type, $span=1) {
 		$this->loadModel('Status.GoogleAnalytics');
 
-		$data = $this->GoogleAnalytics->load($type);
-		$this->set(compact('type', 'data'));
+		$data = $this->GoogleAnalytics->load($type, array('span' => $span));
+		$this->set(compact('type', 'data', 'span'));
 	}
 
 	function _parseFile($filename) {

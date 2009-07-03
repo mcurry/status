@@ -15,6 +15,14 @@ class GoogleAnalytics extends StatusAppModel {
 	function load($type, $options=array()) {
 		$method = "__load" . Inflector::camelize($type);
 
+		if (!empty($options['span'])) {
+			$options['conditions']['start-date'] = date('Y-m-d', strtotime('-' .$options['span'] . ' day'));
+		} else {
+			$options['conditions']['start-date'] = date('Y-m-d', strtotime('-1 day'));
+		}
+
+		$options['conditions']['end-date'] = date('Y-m-d');
+
 		if (method_exists($this, $method)) {
 			return $this-> {$method}($options);
 		}
@@ -23,16 +31,14 @@ class GoogleAnalytics extends StatusAppModel {
 	}
 
 	function __loadKeywords($options) {
-		$defaults = array('conditions' => array('start-date' => date('Y-m-d', strtotime('-1 day')),
-																						'end-date' => date('Y-m-d'),
-																						'dimensions' => array('keyword'),
+		$defaults = array('conditions' => array('dimensions' => array('keyword'),
 																						'metrics' => array('visits')
 																					 ),
 											'limit' => 25,
 											'order' => array('-visits')
 										 );
 
-		$data = parent::find('all', am($defaults, $options));
+		$data = parent::find('all', Set::merge($defaults, $options));
 
 		$keywords = array();
 		foreach($data['Feed']['Entry'] as $entry) {
@@ -49,16 +55,14 @@ class GoogleAnalytics extends StatusAppModel {
 	}
 
 	function __loadReferrers($options) {
-		$defaults = array('conditions' => array('start-date' => date('Y-m-d', strtotime('-1 day')),
-																						'end-date' => date('Y-m-d'),
-																						'dimensions' => array('source', 'referralPath'),
+		$defaults = array('conditions' => array('dimensions' => array('source', 'referralPath'),
 																						'metrics' => array('visits')
 																					 ),
 											'limit' => 24,
 											'order' => array('-visits')
 										 );
 
-		$data = parent::find('all', am($defaults, $options));
+		$data = parent::find('all', Set::merge($defaults, $options));
 
 		$referrers = array();
 		foreach($data['Feed']['Entry'] as $entry) {
@@ -85,16 +89,35 @@ class GoogleAnalytics extends StatusAppModel {
 	}
 
 	function __loadVisits($options) {
-		$defaults = array('conditions' => array('start-date' => date('Y-m-d', strtotime('-1 day')),
-																						'end-date' => date('Y-m-d'),
-																						'dimensions' => array('day', 'hour'),
+		if (empty($options['span'])) {
+			$options['span'] = 1;
+		}
+
+		switch ($options['span']) {
+			default:
+			case 1:
+				return $this->__loadVisitsDay($options);
+			case 7:
+				return $this->__loadVisitsWeek($options);
+			case 30:
+				return $this->__loadVisitsMonth($options);
+			case 365:
+				return $this->__loadVisitsYear($options);
+		}
+	}
+
+	function __loadVisitsDay($options) {
+		$defaults = array('conditions' => array('dimensions' => array('day', 'hour'),
 																						'metrics' => array('visits')
 																					 ),
 											'limit' => 48,
 											'order' => array('-day', '-hour')
 										 );
 
-		$data = parent::find('all', am($defaults, $options));
+
+
+		$data = parent::find('all', Set::merge($defaults, $options));
+
 		if (!is_array($data)) {
 			return false;
 		}
@@ -116,6 +139,75 @@ class GoogleAnalytics extends StatusAppModel {
 			}
 		}
 
+		return array('updated' => $data['Feed']['updated'],
+								 'data' => $visits);
+	}
+
+	function __loadVisitsWeek($options) {
+		$defaults = array('conditions' => array('dimensions' => array('month', 'day'),
+																						'metrics' => array('visits')
+																					 ),
+											'limit' => 7,
+											'order' => array('-month', '-day')
+										 );
+
+		$data = parent::find('all', Set::merge($defaults, $options));
+
+		if (!is_array($data)) {
+			return false;
+		}
+
+		$visits = array();
+		foreach($data['Feed']['Entry'] as $entry) {
+			$visits[$entry['Dimension'][0]['value'] . '/' . $entry['Dimension'][1]['value']] = $entry['Metric']['value'];
+		}
+		
+		return array('updated' => $data['Feed']['updated'],
+								 'data' => $visits);
+	}
+	
+	function __loadVisitsMonth($options) {
+		$defaults = array('conditions' => array('dimensions' => array('year', 'week'),
+																						'metrics' => array('visits')
+																					 ),
+											'limit' => 5,
+											'order' => array('-year', '-week')
+										 );
+
+		$data = parent::find('all', Set::merge($defaults, $options));
+
+		if (!is_array($data)) {
+			return false;
+		}
+
+		$visits = array();
+		foreach($data['Feed']['Entry'] as $entry) {
+			$visits[$entry['Dimension'][0]['value'] . '/' . $entry['Dimension'][1]['value']] = $entry['Metric']['value'];
+		}
+		
+		return array('updated' => $data['Feed']['updated'],
+								 'data' => $visits);
+	}
+	
+	function __loadVisitsYear($options) {
+		$defaults = array('conditions' => array('dimensions' => array('year', 'month'),
+																						'metrics' => array('visits')
+																					 ),
+											'limit' => 12,
+											'order' => array('-year', '-month')
+										 );
+
+		$data = parent::find('all', Set::merge($defaults, $options));
+
+		if (!is_array($data)) {
+			return false;
+		}
+		
+		$visits = array();
+		foreach($data['Feed']['Entry'] as $entry) {
+			$visits[$entry['Dimension'][0]['value'] . '/' . $entry['Dimension'][1]['value']] = $entry['Metric']['value'];
+		}
+		
 		return array('updated' => $data['Feed']['updated'],
 								 'data' => $visits);
 	}

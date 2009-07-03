@@ -1,10 +1,24 @@
 /* =General
 -----------------------------------------------------------------------------*/
-body {
-	font-family:'lucida grande',verdana,helvetica,arial,sans-serif;
-	font-size:.7em;
+html, body, ul, ol, li, p,
+h1, h2, h3, h4, h5, h6,
+form, fieldset, a, img {
+	margin: 0;
+	padding: 0;
+	border: 0;
 }
 
+body {
+	font: 100.01% Arial, Verdana, Helvetica, sans-serif;
+	color: #000;
+	background: #fff;
+}
+
+#status-dashboard {
+	font-size: .7em;
+	margin: 10px;
+	position: relative;
+}
 .status-detail {
 	cursor: pointer;
 }
@@ -45,11 +59,29 @@ body {
 table {
 	border-collapse: collapse;
 	margin: 0;
+	background: #fff;
+	border:1px solid #ccc;
+	border-right:0;
+	clear: both;
+	color: #333;
+	width: 100%;
 }
 table tr th,
 table tr td {
 	text-align: left;
 	border: 1px solid #ccc;
+}
+th {
+	background: #f2f2f2;
+	border:1px solid #bbb;
+	border-top: 1px solid #fff;
+	border-left: 1px solid #fff;
+}
+table tr td {
+	background: #fff;
+	border-right: 1px solid #ccc;
+	padding: 4px;
+	vertical-align: top;
 }
 
 /* =Messages

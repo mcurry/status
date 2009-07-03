@@ -28,11 +28,11 @@
 					?></td></tr>
 					<tr><td><?php __('Output') ?></td><td><?php echo nl2br($row['StatusConsole']['output']) ?></td></tr>
 					<tr><td><?php __('Started') ?></td><td><?php echo $row['StatusConsole']['created'] ?></td></tr>
-					<tr><td><?php __('Runtime') ?></td><td><?php echo $row['StatusConsole']['runtime'] ?>ms</td></tr>
+					<tr><td><?php __('Runtime') ?></td><td><?php echo $row['StatusConsole']['runtime'] ?></td></tr>
 				</table>
 			</div>
 		</td>
-		<td><?php echo $row['StatusConsole']['runtime'] ?>ms</td>
+		<td><?php echo $row['StatusConsole']['runtime'] ?></td>
 	</tr>
 <?php } ?>
 </table>

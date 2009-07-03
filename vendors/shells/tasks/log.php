@@ -18,7 +18,7 @@ class LogTask extends Shell {
 	}
 
 	function out($message) {
-		$this->output = $message . "\n";
+		$this->output .= $message . "\n";
 	}
 
 	function __destruct() {

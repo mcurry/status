@@ -3,7 +3,7 @@ class STATUS_CONFIG {
 
   var $googleAnalytics = array(
     'datasource' => 'google_analytics',
-    'username' => 'xxxx',
+    'email' => 'xxxx',
     'password' => 'yyyy',
 		'account_id' => 'zzzzzzz'
   );

@@ -1,0 +1,56 @@
+/*
+ * App Status Planel CakePHP Plugin
+ * Copyright (c) 2009 Matt Curry
+ * www.PseudoCoder.com
+ * http://github.com/mcurry/status
+ *
+ * @author      Matt Curry <matt@pseudocoder.com>
+ * @license     MIT
+ *
+ */
+ 
+/* About */
+  One convienent page where you can get info about your app.  Google analytics, log files, cron'd shells, etc.  In addition to the core panels it is simple to add your own.
+
+/* Instructions */
+	1. Download the plugin to /app/plugins/status
+	2. Add the panels you want active in your bootstrap.php:
+		Configure::write('Status.panels', array('google_analytics' => array('visits', 'referrers', 'keywords'),
+																						'system',
+																						'shell',
+																						'logs' => array('error', 'debug'),
+																					 ));
+	3. By default no one can reach the status panel.  It is up to you to deteremine who will have access.  In your AppController::beforeFilter() put:
+		if(...) {
+			Configure::write('Status.allow', true);
+		}
+	4. Go to http://yourapp/status
+	
+/* Core Panels */
+  /* Google Analytics */
+  Multiple to panels for quick info on your visits, refererrs and search engine key words.  Adjustable timeframes to get a recent or long range snapshot.
+  
+  /* Shell */
+  Add logging to your shells to see info results when they run.  Great for shells that run from cron.  Clicking on the shell link in the panel pops open a window with detailed information.  Requires integrating the log task in your shell:
+    1) Include the task in your shell's attributes:
+      var $tasks = array('Log');
+     
+    2) Start the logging in the beginning of your shell:
+      $this->Log->start();
+      
+    3) Store any messages you want to be available in the panel:
+      $this->Log->out("Processed $count records");
+      
+    4) Signal the script is done:
+      $this->Log->end();
+      
+  /* System */
+  Basic infomation about the system hardware, including disk space and uptime.
+  
+  /* Logs */
+  Show Cake's log files.  Can be used on any log file in /app/tmp/logs, including custom ones.  Just pass the log file name(s).
+
+/* Other Panels */
+  /* Click Tracking */
+  Track links that are click on your app.  Mainly used for outgoing affiliate links, but can also be used for downloaded files.
+  http://github.com/mcurry/click

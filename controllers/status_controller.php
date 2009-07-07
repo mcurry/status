@@ -49,10 +49,14 @@ class StatusController extends StatusAppController {
 	function system() {
 		$free = disk_free_space("/");
 		$total = disk_total_space("/");
-		$perc = round(($free / $total * 100), 2);
-		$disk = array('free' => $this->__diskHumanize($free),
-									'total' => $this->__diskHumanize($total),
-									'perc' => $perc);
+		if($free !== false && $total !== false) {
+  		$perc = round(($free / $total * 100), 2);
+  		$disk = array('free' => $this->__diskHumanize($free),
+  									'total' => $this->__diskHumanize($total),
+  									'perc' => $perc);
+    } else {
+      $disk = false;
+    }
 
 		$uptime = exec('uptime');
 
@@ -86,7 +90,11 @@ class StatusController extends StatusAppController {
 		$data = $this->GoogleAnalytics->load($type, array('span' => $span));
 		$this->set(compact('type', 'data', 'span'));
 	}
-
+	
+/**
+ * I stole the regex part for parsing CakePHP log files from Mark Story's awesome DebugKit
+ * http://thechaw.com/debug_kit/
+ */
 	function _parseFile($filename) {
 		$file =& new File($filename);
 		$contents = $file->read();

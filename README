@@ -28,21 +28,23 @@
 	
 /* Core Panels */
   /* Google Analytics */
-  Multiple to panels for quick info on your visits, refererrs and search engine key words.  Adjustable timeframes to get a recent or long range snapshot.
-  
+  Multiple panels for quick info on your visits, refererrs and search engine keywords using the Google Analytics API.  Adjustable timeframes to get a recent or long range snapshot.
+	You must set up the config file to access your analytics via Google's API:
+		1) Rename /app/plugins/status/config/status.php.default to status.php
+		2) Edit the file to include your Google email and password.
+			 The account_id can be found in the url at Google (https://www.google.com/analytics/reporting/?reset=1&id=xxxxxxxx)
+		
   /* Shell */
-  Add logging to your shells to see info results when they run.  Great for shells that run from cron.  Clicking on the shell link in the panel pops open a window with detailed information.  Requires integrating the log task in your shell:
-    1) Include the task in your shell's attributes:
-      var $tasks = array('Log');
-     
-    2) Start the logging in the beginning of your shell:
-      $this->Log->start();
-      
-    3) Store any messages you want to be available in the panel:
-      $this->Log->out("Processed $count records");
-      
-    4) Signal the script is done:
-      $this->Log->end();
+  Add logging to your shells to capture results.  Great for shells that run from cron.  Clicking on the shell link in the panel pops open a window with detailed information.  Requires integrating the log task in your shell:
+		1) Run the SQL in /app/plugins/status/config/sql/status_consoles.sql
+    2) Include the task in your shell's attributes:
+       var $tasks = array('Log');
+    3) Start the logging in the beginning of your shell:
+       $this->Log->start();
+    4) Store any messages you want to be available in the panel:
+       $this->Log->out("Processed $count records");
+    5) Signal the script is done:
+       $this->Log->end();
       
   /* System */
   Basic infomation about the system hardware, including disk space and uptime.

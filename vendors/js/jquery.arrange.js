@@ -24,9 +24,14 @@
 	};
 
 	$.fn.arrange.run = function($this) {
-		totalWidth = $this.width();
+		totalWidth = $this.innerWidth();
+		
+		//figure out the margin
+		widthMargin = $this.children("div:first").outerWidth(true) - $this.children("div:first").outerWidth();
+		heightMargin = $this.children("div:first").outerHeight(true) - $this.children("div:first").outerHeight();
+		
 		totalColumns = Math.floor(totalWidth / options.bestWidth);
-		width = Math.floor((totalWidth - (totalColumns * options.margin)) / totalColumns);
+		width = Math.floor((totalWidth - (totalColumns * widthMargin)) / totalColumns);
 
 		columnsHeight = {};
 		row = 0;
@@ -45,7 +50,7 @@
 			bestColumn = col;
 			if (row == 1) {
 				height = 0;
-				top = columnsHeight[bestColumn];
+				columnTop = columnsHeight[bestColumn];
 			} else {
 				bestColumn = null;
 				for (i = 0; i < totalColumns; i++) {
@@ -54,25 +59,24 @@
 					}
 				}
 				
-				top = (columnsHeight[bestColumn] + options.margin) + "px";
+				columnTop = columnsHeight[bestColumn]+ "px";
 			}
 
 			css = {
 				width: width + "px",
 				position: "absolute",
-				left: ((bestColumn * width) + (bestColumn * options.margin)) + "px",
-				top: top
+				left: ((bestColumn * width) + (bestColumn * widthMargin)) + "px",
+				top: columnTop
 			};
 			$(this).css(css);
 
-			columnsHeight[bestColumn] += $(this).outerHeight() + options.margin;
+			columnsHeight[bestColumn] += $(this).outerHeight() + heightMargin;
 			col++;
 		})
 	};
 
 	$.fn.arrange.defaults = {
-		bestWidth: 350,
-		margin: 20
+		bestWidth: 350
 	};
 
 })(jQuery);

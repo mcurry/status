@@ -18,6 +18,7 @@
 		Configure::write('Status.panels', array('google_analytics' => array('visits', 'referrers', 'keywords'),
 																						'system',
 																						'shell',
+																						'tests'
 																						'logs' => array('error', 'debug'),
 																					 ));
 	3. By default no one can reach the status panel.  It is up to you to deteremine who will have access.  In your AppController::beforeFilter() put:
@@ -45,7 +46,10 @@
        $this->Log->out("Processed $count records");
     5) Signal the script is done:
        $this->Log->end();
-      
+
+  /* Tests */
+  Run your app's unit tests right from the panel, regardless of debug mode.  If there are any errors you can click on the summary line to get the full details.
+	
   /* System */
   Basic infomation about the system hardware, including disk space and uptime.
   

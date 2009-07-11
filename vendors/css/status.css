@@ -56,7 +56,10 @@ body {
 	.block p {
 		padding: 2px 5px;
 	}
-
+	.block ul, .block li {
+		margin: 0 12px;
+	}
+	
 /* =Tables
 -----------------------------------------------------------------------------*/
 table {

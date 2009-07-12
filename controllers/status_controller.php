@@ -91,6 +91,46 @@ class StatusController extends StatusAppController {
 		$this->set(compact('type', 'data', 'span'));
 	}
 	
+	function tests() {
+		$path = TESTS . 'cases';
+		$Folder = new Folder($path);
+		$cases = $Folder->findRecursive('.*\.test\.php');
+		foreach($cases as $i => $case) {
+			$case = str_replace($path, '', $case);
+			$case = str_replace('.test.php', '', $case);
+			$cases[$i] = trim($case, DS);
+		}
+		
+		return array('cases' => $cases);
+	}
+	
+	function tests_run() {
+		if(!empty($this->params['url']['case'])) {
+			$case = $this->params['url']['case'];
+			
+			if(stripos($_ENV['OS'], 'windows') !== false) {
+				$cmd = 'cake.bat';
+			} else {
+				$cmd = 'cake';
+			}
+			
+			$cmd = ROOT.DS.CAKE.'console'.DS.$cmd.' -app '.APP.' testsuite app case ' . $case;
+			exec($cmd, $results);
+			
+			$this->set('case', $case);
+			$this->set('summary', $results[count($results) - 2]);
+			$this->set('results', $this->__parseTestResult($results));
+		}
+	}
+	
+	function __parseTestResult($results) {
+		if(count($results) == 13) {
+			return false;
+		}
+		
+		return array_slice($results, 11, -2);
+	}
+	
 /**
  * I stole the regex part for parsing CakePHP log files from Mark Story's awesome DebugKit
  * http://thechaw.com/debug_kit/

@@ -18,8 +18,8 @@
 		Configure::write('Status.panels', array('google_analytics' => array('visits', 'referrers', 'keywords'),
 																						'system',
 																						'shell',
-																						'tests'
-																						'logs' => array('error', 'debug'),
+																						'tests',
+																						'logs' => array('error', 'debug')
 																					 ));
 	3. By default no one can reach the status panel.  It is up to you to deteremine who will have access.  In your AppController::beforeFilter() put:
 		if(...) {

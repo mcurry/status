@@ -15,11 +15,11 @@
 /* Instructions */
 	1. Download the plugin to /app/plugins/status
 	2. Add the panels you want active in your bootstrap.php:
-		Configure::write('Status.panels', array('google_analytics' => array('visits', 'referrers', 'keywords'),
-																						'system',
-																						'shell',
-																						'tests'
-																						'logs' => array('error', 'debug'),
+		Configure::write('Status.panels', array('Status.google_analytics' => array('visits', 'referrers', 'keywords'),
+																						'Status.system',
+																						'Status.shell',
+																						'Status.tests'
+																						'Status.logs' => array('error', 'debug'),
 																					 ));
 	3. By default no one can reach the status panel.  It is up to you to deteremine who will have access.  In your AppController::beforeFilter() put:
 		if(...) {

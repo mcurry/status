@@ -33,7 +33,7 @@ class StatusController extends StatusAppController {
 			if (strpos($panel, '.') !== false) {
 				list($plugin, $panel) = explode('.', $panel);
 			} else {
-				$plugin = 'Status';
+				$plugin = false;
 			}
 
 			foreach($options as $option) {

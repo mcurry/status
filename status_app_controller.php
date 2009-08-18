@@ -11,8 +11,8 @@
  */
  
 class StatusAppController extends AppController {
-	function beforeFilter() {
-		parent::beforeFilter();
+	function beforeRender() {
+		parent::beforeRender();
 		
 		if(!Configure::read('Status.allow')) {
 			return $this->redirect($this->referer());

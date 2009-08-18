@@ -63,9 +63,9 @@ class GoogleAnalyticsSource extends DataSource {
 
 	function __request($queryData=array()) {
 		$key = 'GoogleAnalytics.' . md5(serialize($queryData));
-		if ($data = Cache::read($key, 'google_analytics')) {
-			return $data;
-		}
+		//if ($data = Cache::read($key, 'google_analytics')) {
+		//	return $data;
+		//}
 
 		if (!$this->connected && !$this->__connect()) {
 			return false;
@@ -77,12 +77,12 @@ class GoogleAnalyticsSource extends DataSource {
 		$response = $this->Http->get($this->urls['data'], $queryData, $request);
 
 		if ($this->Http->response['status']['code'] != 200) {
-			var_dump($response);
-			return $response;
+			//var_dump($response);
+			return false;
 		}
 
 		$this->Xml->load($response);
-		$data = $this->Xml->toArray();
+		$data = $this->Xml->toArray(false);
 
 		Cache::write($key, $data, 'google_analytics');
 

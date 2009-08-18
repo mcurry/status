@@ -52,16 +52,16 @@ class GoogleAnalytics extends StatusAppModel {
 		$data = parent::find('all', Set::merge($defaults, $options));
 
 		$keywords = array();
-		foreach($data['Feed']['Entry'] as $entry) {
-			if ($entry['Dimension']['value'] == '(not set)') {
+		foreach($data['feed']['entry'] as $entry) {
+			if ($entry['dimension']['value'] == '(not set)') {
 				continue;
 			}
 
-			$keywords[] = array('keyword' => $entry['Dimension']['value'],
-													'visits' => $entry['Metric']['value']);
+			$keywords[] = array('keyword' => $entry['dimension']['value'],
+													'visits' => $entry['metric']['value']);
 		}
 
-		return array('updated' => $data['Feed']['updated'],
+		return array('updated' => $data['feed']['updated'],
 								 'data' => $keywords);
 	}
 
@@ -76,12 +76,12 @@ class GoogleAnalytics extends StatusAppModel {
 		$data = parent::find('all', Set::merge($defaults, $options));
 
 		$referrers = array();
-		foreach($data['Feed']['Entry'] as $entry) {
-			$url = trim($entry['Dimension'][0]['value'], '()');
+		foreach($data['feed']['entry'] as $entry) {
+			$url = trim($entry['dimension'][0]['value'], '()');
 			$link = true;
 
-			if ($entry['Dimension'][1]['value'] != '(not set)') {
-				$url .= $entry['Dimension'][1]['value'];
+			if ($entry['dimension'][1]['value'] != '(not set)') {
+				$url .= $entry['dimension'][1]['value'];
 			} else if ($url == 'direct') {
 				$url .= ' (none)';
 				$link = false;
@@ -92,10 +92,10 @@ class GoogleAnalytics extends StatusAppModel {
 
 			$referrers[] = array('url' => $url,
 													 'link' => $link,
-													 'visits' => $entry['Metric']['value']);
+													 'visits' => $entry['metric']['value']);
 		}
 
-		return array('updated' => $data['Feed']['updated'],
+		return array('updated' => $data['feed']['updated'],
 								 'data' => $referrers);
 	}
 
@@ -136,21 +136,21 @@ class GoogleAnalytics extends StatusAppModel {
 		$found = false;
 		$visits = array();
 		$count = 0;
-		foreach($data['Feed']['Entry'] as $entry) {
-			if (!$found && $entry['Metric']['value'] == 0) {
+		foreach($data['feed']['entry'] as $entry) {
+			if (!$found && $entry['metric']['value'] == 0) {
 				continue;
 			}
 
 			$count ++;
 			$found = true;
-			$visits[$entry['Dimension'][1]['value']] = $entry['Metric']['value'];
+			$visits[$entry['dimension'][1]['value']] = $entry['metric']['value'];
 
 			if ($count > 24) {
 				break;
 			}
 		}
 
-		return array('updated' => $data['Feed']['updated'],
+		return array('updated' => $data['feed']['updated'],
 								 'data' => $visits);
 	}
 
@@ -169,11 +169,11 @@ class GoogleAnalytics extends StatusAppModel {
 		}
 
 		$visits = array();
-		foreach($data['Feed']['Entry'] as $entry) {
-			$visits[$entry['Dimension'][0]['value'] . '/' . $entry['Dimension'][1]['value']] = $entry['Metric']['value'];
+		foreach($data['feed']['entry'] as $entry) {
+			$visits[$entry['dimension'][0]['value'] . '/' . $entry['dimension'][1]['value']] = $entry['metric']['value'];
 		}
 		
-		return array('updated' => $data['Feed']['updated'],
+		return array('updated' => $data['feed']['updated'],
 								 'data' => $visits);
 	}
 	
@@ -192,11 +192,11 @@ class GoogleAnalytics extends StatusAppModel {
 		}
 
 		$visits = array();
-		foreach($data['Feed']['Entry'] as $entry) {
-			$visits[$entry['Dimension'][0]['value'] . '/' . $entry['Dimension'][1]['value']] = $entry['Metric']['value'];
+		foreach($data['feed']['entry'] as $entry) {
+			$visits[$entry['dimension'][0]['value'] . '/' . $entry['dimension'][1]['value']] = $entry['metric']['value'];
 		}
 		
-		return array('updated' => $data['Feed']['updated'],
+		return array('updated' => $data['feed']['updated'],
 								 'data' => $visits);
 	}
 	
@@ -215,11 +215,11 @@ class GoogleAnalytics extends StatusAppModel {
 		}
 		
 		$visits = array();
-		foreach($data['Feed']['Entry'] as $entry) {
-			$visits[$entry['Dimension'][0]['value'] . '/' . $entry['Dimension'][1]['value']] = $entry['Metric']['value'];
+		foreach($data['feed']['entry'] as $entry) {
+			$visits[$entry['dimension'][0]['value'] . '/' . $entry['dimension'][1]['value']] = $entry['metric']['value'];
 		}
 		
-		return array('updated' => $data['Feed']['updated'],
+		return array('updated' => $data['feed']['updated'],
 								 'data' => $visits);
 	}
 }

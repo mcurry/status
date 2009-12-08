@@ -19,7 +19,7 @@
 																						'Status.system',
 																						'Status.shell',
 																						'Status.tests'
-																						'Status.logs' => array('error', 'debug'),
+																						'Status.logs' => array('error', 'debug')
 																					 ));
 	3. By default no one can reach the status panel.  It is up to you to deteremine who will have access.  In your AppController::beforeFilter() put:
 		if(...) {

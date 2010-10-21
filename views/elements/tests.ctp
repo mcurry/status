@@ -11,14 +11,14 @@
 			echo '<h2>'; __('Test Cases'); echo '</h2>';
 			echo '<ul>';
 			foreach($tests['cases'] as $case) {
-				echo '<li>' . $html->link($case, array('controller' => 'status', 'action' => 'tests_run', '?' => array('case' => $case)), array('class' => 'status-tests-case')) . '</li>';
+				echo '<li>' . $this->Html->link($case, array('controller' => 'status', 'action' => 'tests_run', '?' => array('case' => $case)), array('class' => 'status-tests-case')) . '</li>';
 			}
 			echo '</ul>';
 		}
 	?>
 	
 	<div id="status-tests-results"></div>
-	<div id="status-tests-running"><?php echo $html->image('/status/img/ajax-loader.gif') ?></div>
+	<div id="status-tests-running"><?php echo $this->Html->image('/status/img/ajax-loader.gif') ?></div>
 	
 	<script type="text/javascript">
 		$(function(){

@@ -1,0 +1,104 @@
+/* =General
+-----------------------------------------------------------------------------*/
+html, body, ul, ol, li, p,
+h1, h2, h3, h4, h5, h6,
+form, fieldset, a, img {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+body {
+	font: 100.01% Arial, Verdana, Helvetica, sans-serif;
+	color: #000;
+	background: #fff;
+}
+
+#status-dashboard {
+	font-size: .7em;
+	margin: 10px;
+	position: relative;
+}
+.status-detail {
+	cursor: pointer;
+}
+
+/* =Blocks
+-----------------------------------------------------------------------------*/
+.block {
+	border: 1px solid #ccc;
+	float: left;
+	width: 300px;
+	margin: 0 10px 10px 10px;
+	padding: 5px;
+	background: #003D4C;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+	.block h1 {
+		background: #003D4C;
+		color: #eee;
+		font-weight: bold;
+		padding: 0 5px 2px 5px;
+		margin: 0;
+	}
+	.block h1 select {
+		vertical-align: middle;
+	}
+	.block h2 {
+		font-size: 1em;
+		padding: 2px 5px;
+	}
+	.block p,
+	.block div {
+		background: #fff;
+	}
+	.block p {
+		padding: 2px 5px;
+	}
+	.block ul, .block li {
+		margin: 0 12px;
+	}
+	
+/* =Tables
+-----------------------------------------------------------------------------*/
+table {
+	border-collapse: collapse;
+	margin: 0;
+	background: #fff;
+	border:1px solid #ccc;
+	border-right:0;
+	clear: both;
+	color: #333;
+	width: 100%;
+}
+table tr th,
+table tr td {
+	text-align: left;
+	border: 1px solid #ccc;
+}
+th {
+	background: #f2f2f2;
+	border:1px solid #bbb;
+	border-top: 1px solid #fff;
+	border-left: 1px solid #fff;
+}
+table tr td {
+	background: #fff;
+	border-right: 1px solid #ccc;
+	padding: 4px;
+	vertical-align: top;
+}
+
+/* =Messages
+-----------------------------------------------------------------------------*/
+.success,
+.success td {
+	background: green;
+	color: #fff;
+}
+.error,
+.error td {
+	background: red;
+	color: #fff;
+}

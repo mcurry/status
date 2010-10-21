@@ -13,19 +13,19 @@
 <?php echo $form->end(); ?>
 
 <div id="<?php echo $key ?>">
-	<?php echo $html->image('/status/img/ajax-loader.gif') ?>
+	<?php echo $this->Html->image('/status/img/ajax-loader.gif') ?>
 </div>
 
 
 <script type="text/javascript">
 	$(function(){
-		$.get("/status/google_analytics/<?php echo $options ?>/" + $("#<?php echo $key ?>-span").val(), function(data) {
+		$.get("/status/panels/google_analytics/<?php echo $options ?>/" + $("#<?php echo $key ?>-span").val(), function(data) {
 			$("#<?php echo $key ?>").html(data);
 		});
 		
 		$("#<?php echo $key ?>-span").change(function() {
 			$("#<?php echo $key ?>").html("<img src=\"/status/img/ajax-loader.gif\" \>");
-			$.get("/status/google_analytics/<?php echo $options ?>/" + $(this).val(), function(data) {
+			$.get("/status/panels/google_analytics/<?php echo $options ?>/" + $(this).val(), function(data) {
 				$("#<?php echo $key ?>").html(data);
 			});
 		});

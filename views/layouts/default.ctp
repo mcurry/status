@@ -25,17 +25,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<?php echo $html->charset(); ?>
+	<?php echo $this->Html->charset(); ?>
 	<title>
 		<?php __('CakePHP: Status Dashboard'); ?>
 	</title>
 	<?php
-		echo $html->meta('icon');
+		echo $this->Html->meta('icon');
 
-		echo $javascript->link(array('http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js',
+		echo $this->Html->script(array('http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js',
 																 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js',
 																 '/status/js/jquery.arrange.js'));
-		echo $html->css(array('http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/redmond/jquery-ui.css',
+		echo $this->Html->css(array('http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/redmond/jquery-ui.css',
 													'/status/css/status'));
 
 		echo $scripts_for_layout;

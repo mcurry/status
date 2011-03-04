@@ -1,5 +1,5 @@
 <?php
-	$data = $this->requestAction(array('controller' => 'status', 'action' => 'shell'));
+	$data = $this->requestAction(array('plugin' => 'status', 'controller' => 'panels', 'action' => 'shell'));
 ?>
 
 <h1><?php __('Shells') ?></h1>

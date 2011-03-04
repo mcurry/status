@@ -1,5 +1,5 @@
 <?php
-	$tests = $this->requestAction(array('controller' => 'status', 'action' => 'tests'));
+	$tests = $this->requestAction(array('plugin' => 'status', 'controller' => 'panels', 'action' => 'tests'));
 ?>
 
 <div>
